@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="/static/primer.css" />
+</head>
+
+<body>
+    <h1 class="color-bg-accent">GET CVE Info</h1>
+    <div style="padding:3em;">
+        <form method="post">
+            <h2>CVE List</h2>
+            <dl class="form-group">
+                <dd>
+                <textarea class="form-control" name="user_cve_list">{{ user_cve_list }}</textarea>
+                </dd>
+            </dl>
+            <button class="btn btn-outline" type="submit">Getting!</button>
+        </form>
+    </div>
+
+    {% if msg %}
+    <div style="padding:3em;">
+        <div class="flash">
+        {{ msg }}
+        </div>
+    </div>
+    {% endif %}
+
+    <div style="padding:3em;">
+        <table class="table  width-full">
+            <thead>
+                <tr class="border-bottom color-bg-accent">
+                    <th class="border-right border-left">name</th>
+                    <th class="border-right border-left">description</th>
+                    <th class="border-right border-left">Attack Vector</th>
+                    <th class="border-right border-left">product_name</th>
+                    <th class="border-right border-left">package_name</th>
+                    <th class="border-right border-left">fix_state</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in cve_view_data %}
+                <tr class="border-bottom">
+                    <td><a href="{{ data.url }}" target="_blank"> {{ data.name }}</a></td>
+                    <td>{{ data.description }}</td>
+                    <td>{{ data.attack_vector }}</td>
+                    <td>{{ data.product_name }}</td>
+                    <td>{{ data.package_name }}</td>
+                    <td>{{ data.fix_state }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div></body>
+
+</html>
